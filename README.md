@@ -76,14 +76,14 @@
 ------------------------------------------------------------------------------------------------------------------------
 ## pm2(process manager)
 
-* node.js 개발도구로 브라켓을 사용하였고 process manager인 pm2를 사용하였습니다. 
+* node.js 개발도구로 **Brackets** 을 사용하였고 process manager인 **pm2** 를 사용하였습니다. 
 
 * 설치 
   ```
   npm install pm2 
   ```
   
-* 실행(여기서 --watch를 추가하면 코드가 변경되었을때 저장하는 순간 서버가 **auto-restart** 됩니다.)
+* 실행 ==>여기서 --watch를 추가하면 코드가 변경되었을때 저장하는 순간 서버가 **auto-restart** 됩니다.
   ```
   pm2 start main.js --watch
   ```
@@ -93,14 +93,19 @@
   pm2 stop main.js
   ```
   
-* LOG (각종 오류 메세지들과 console 값을 볼 수 있습니다.)
+* LOG ==> 각종 오류 메세지들과 console 값을 볼 수 있습니다.
   ```
   pm2 log
   ```
   
-* Monitoring (돌고있는 서버와 console 값 등등 많은 정보들을 볼 수 있습니다.)
+* Monitoring ==> 돌고있는 서버와 console 값 등등 많은 정보들을 볼 수 있습니다.
   ```
   pm2 monit
+  ```
+  
+* Server Kill ==> 아래 코드를 cmd창에 입력하면 현재 어느 port 이든지 node로 실행되고있는 server를 모두 Kill할 수 있습니다.
+  ```
+  taskkill /F /IM node.exe
   ```
   
 * 더 자세한 정보는 http://pm2.keymetrics.io/ 이 사이트를 참조하십시오.
