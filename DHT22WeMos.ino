@@ -38,6 +38,7 @@ void setup() {
   Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
+  delay(10000);
   
   WiFi.begin(ssid, password);
   
@@ -86,10 +87,10 @@ void loop() {
             }
             else{
               // Computes temperature values in Celsius + Fahrenheit and Humidity
-              float hic = dht.computeHeatIndex(t, h, false);       
-              dtostrf(hic, 6, 2, celsiusTemp);             
-              float hif = dht.computeHeatIndex(f, h);
-              dtostrf(hif, 6, 2, fahrenheitTemp);         
+              //float hic = dht.computeHeatIndex(t, h, false);       
+              dtostrf(t, 6, 2, celsiusTemp);             
+              //float hif = dht.computeHeatIndex(f, h);
+              dtostrf(f, 6, 2, fahrenheitTemp);         
               dtostrf(h, 6, 2, humidityTemp);
               // You can delete the following Serial.print's, it's just for debugging purposes
               Serial.print("Humidity: ");
@@ -98,26 +99,11 @@ void loop() {
               Serial.print(t);
               Serial.print(" *C ");
               Serial.print(f);
-              Serial.print(" *F\t Heat index: ");
-              Serial.print(hic);
-              Serial.print(" *C ");
-              Serial.print(hif);
-              Serial.print(" *F");
-              Serial.print("Humidity: ");
-              Serial.print(h);
-              Serial.print(" %\t Temperature: ");
-              Serial.print(t);
-              Serial.print(" *C ");
-              Serial.print(f);
-              Serial.print(" *F\t Heat index: ");
-              Serial.print(hic);
-              Serial.print(" *C ");
-              Serial.print(hif);
               Serial.println(" *F");
             }
             client.println("HTTP/1.1 200 OK");
             client.println("Content-Type: text/html");
-            client.println("Connection: close");
+            client.println("Connection: keep-alive");
             client.println("Refresh: 2");
             client.println();
             // your actual web page that displays temperature and humidity

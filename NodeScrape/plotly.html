@@ -3,11 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>plotly.js Project: Real time signals from multiple sensors</title>
+    <title>WeMos - Real time signals from multiple sensors</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.js"></script>
-
-    <!--<script src="./node_modules/canvas-gauges/gauge.min.js"></script>-->
+    <script src="gauge.min.js"></script>
 
     <style>
         body {
@@ -22,15 +21,17 @@
 <body>
     <!-- style="width:100%;height:100%"> -->
     <!-- Plotly chart will be drawn inside this DIV -->
-    <h1 align="center"> Real-time Weather Station from sensors </h1>
-    <!-- 1st gauge -->
-    <!--<div align="center">-->
-        <!--<canvas id="gauge1"> </canvas>-->
+    <h1 align="center">WeMos - Real-time Weather Station from sensors </h1>
+    
+    <!-- gauges -->
+    <div align="center">
+        <!-- 1st gauge -->
+        <canvas id="gauge1"> </canvas>
         <!-- 2nd gauge -->
-        <!--<canvas id="gauge2"> </canvas>-->
+        <canvas id="gauge2"> </canvas>
         <!-- 3rd gauge -->
-        <!--<canvas id="gauge3"> </canvas>-->
-    <!--</div>-->
+        <canvas id="gauge3"> </canvas>
+    </div>
     <!-- <div id="console"> </div> -->
     <h3 align="center"> on Time: <span id="time"> </span> </h3>
     <div id="myDiv"></div>
@@ -78,9 +79,9 @@
 
                     // when new data is coming, keep on streaming            
                     ctime.innerHTML = dtda[0];
-                    //gauge_temperature.setValue(dtda[1]) // temperature gauge
-                    //gauge_fahrenheit.setValue(dtda[2]); // fahrenheit gauge
-                    //gauge_humidity.setValue(dtda[3]); // humidity gauge
+                    gauge_temperature.setValue(dtda[1]) // temperature gauge
+                    gauge_fahrenheit.setValue(dtda[2]); // fahrenheit gauge
+                    gauge_humidity.setValue(dtda[3]); // humidity gauge
 
                     tArray = tArray.concat(dtda[0]);
                     tArray.splice(0, 1); // remove the oldest data
@@ -118,7 +119,7 @@
         var data = [{
             x: tArray,
             y: y1Track,
-            name: 'temperature',
+            name: 'temp',
             mode: "markers+lines", // "lines+markers"
             line: {
                 color: "#1f77b4",
@@ -135,7 +136,7 @@
         }, {
             x: tArray,
             y: y2Track,
-            name: 'fahrenheit',
+            name: 'fahr',
             xaxis: 'x2',
             yaxis: 'y2',
             mode: "markers+lines", // "lines+markers"
@@ -154,7 +155,7 @@
         }, {
             x: tArray,
             y: y3Track,
-            name: 'humidity',
+            name: 'humi',
             xaxis: 'x3',
             yaxis: 'y3',
             mode: "markers+lines", // "lines+markers"
@@ -178,7 +179,7 @@
                 domain: [0, 1]
             },
             yaxis: {
-                title: 'temperature (°C)',
+                title: 'temp (°C)',
                 domain: [0, 0.3],
                 range: [-30, 50]
             },
@@ -189,7 +190,7 @@
                 showticklabels: false
             },
             yaxis2: {
-                title: 'Fahrenheit (°f)',
+                title: 'Fahr (°f)',
                 domain: [0.35, 0.65],
                 range: [0, 150]
             },
@@ -200,14 +201,14 @@
                 showticklabels: false
             },
             yaxis3: {
-                title: 'humidity (%)',
+                title: 'humi (%)',
                 domain: [0.7, 1],
                 range: [0, 100]
             }
         };
 
         // gauge configuration
-        /*var gauge_temperature = new Gauge({
+        var gauge_temperature = new Gauge({
             renderTo: 'gauge1',
             width: 240,
             height: 240,
@@ -217,7 +218,7 @@
                 int: 2,
                 dec: 1
             },
-            title: "Temperature",
+            title: "Temp",
             minValue: -30,
             maxValue: 50,
             majorTicks: ['-30', '-20', '-10', '0', '10', '20', '30', '40', '50'],
@@ -289,35 +290,35 @@
                 int: 2,
                 dec: 1
             },
-            title: "Fahrenheit",
+            title: "Fahr",
             minValue: 0,
-            maxValue: 100,
-            majorTicks: ['0', '20', '40', '60', '80', '100'],
+            maxValue: 150,
+            majorTicks: ['0', '30', '60', '90', '120', '150'],
             minorTicks: 10,
             strokeTicks: false,
             highlights: [{
                     from: 0,
-                    to: 20,
-                    color: '#aaa'
+                    to: 30,
+                    color: '#bbb'
                 },
                 {
-                    from: 20,
-                    to: 40,
+                    from: 30,
+                    to: 60,
                     color: '#ccc'
                 },
                 {
-                    from: 40,
-                    to: 60,
+                    from: 60,
+                    to: 90,
                     color: '#ddd'
                 },
                 {
-                    from: 60,
-                    to: 80,
+                    from: 90,
+                    to: 120,
                     color: '#eee'
                 },
                 {
-                    from: 80,
-                    to: 100,
+                    from: 120,
+                    to: 150,
                     color: '#fff'
                 }
             ],
@@ -346,7 +347,7 @@
                 int: 2,
                 dec: 1
             },
-            title: "humidity",
+            title: "humi",
             minValue: 0,
             maxValue: 100, // new
             majorTicks: ['0', '20', '40', '60', '80', '100'],
@@ -355,7 +356,7 @@
             highlights: [{
                     from: 0,
                     to: 20,
-                    color: '#aaa'
+                    color: '#bbb'
                 },
                 {
                     from: 20,
@@ -391,7 +392,7 @@
                 }
             }
         });
-        gauge_humidity.draw();*/
+        gauge_humidity.draw();
 
     </script>
 </body>

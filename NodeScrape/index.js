@@ -9,14 +9,18 @@ var request = require('request');
 var io = require('socket.io').listen(3000, function (req, res) {
     console.log('Listening on port 3000');
 });
+
 var dht22data = [];
+var dateStr = '';
+var CelsiusData = '';
+var FahrenheitData = '';
+var HumidityData = '';
 
 
-//var url = 'http://192.168.0.30/';
+//var url = 'http://192.168.0.133/';
 var url = 'http://192.168.0.11/';
 
 var Celsius = '';
-
 function getCelsius() {
 
     request(url, function (err, res, body) {
@@ -32,7 +36,6 @@ function getCelsius() {
 }
 
 var Fahrenheit = '';
-
 function getFahrenheit() {
 
     request(url, function (err, res, body) {
@@ -48,7 +51,6 @@ function getFahrenheit() {
 }
 
 var Humidity = '';
-
 function getHumidity() {
 
     request(url, function (err, res, body) {
@@ -89,17 +91,17 @@ io.sockets.on('connection', function (socket) {
 
 setInterval(function () {
     // this array stores date and data of temp, humi.
-    var dateStr = getDateString();
-    var CelsiusData = getCelsius();
-    var FahrenheitData = getFahrenheit();
-    var HumidityData = getHumidity();
+    dateStr = getDateString();
+    CelsiusData = getCelsius();
+    FahrenheitData = getFahrenheit();
+    HumidityData = getHumidity();
     dht22data[0] = dateStr; // Date
     dht22data[1] = CelsiusData; // temperature data
     dht22data[2] = FahrenheitData; // Fahrenheit data
     dht22data[3] = HumidityData; // humidity data
     io.sockets.emit('message', dht22data);
-    console.log(dht22data);
-}, 3000);
+    console.log("COMSI," + dht22data);
+}, 1500);
 
 /*router.get('/', function (request, res) {
     var html = template.HTML(getCelsius(), getFahrenheit(), getHumidity());
@@ -107,7 +109,7 @@ setInterval(function () {
     res.send(html);
 });*/
 
-/*app.get('/', function (req, res) {
+/*router.get('/', function (req, res) {
     res.sendFile('C:/Users/rhks1/NodeScrape/plotly.html');
 });*/
 
