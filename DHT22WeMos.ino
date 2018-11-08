@@ -2,15 +2,14 @@
 #include "DHT.h"
 #define DHTTYPE DHT22
 
-const char* ssid = "BlackPig";
-const char* password = "dy**909090";
+const char* ssid = "BlackPig"; // SSID
+const char* password = "dy**909090"; //Password
 //const char* ssid = "chaoslab1";
 //const char* password = "biochaos";
 
 WiFiServer server(80);
 
-
-const int DHTPin = 2; // weMos 핀맵에따라 D4에 연결한다
+const int DHTPin = 2; // weMos 핀맵에따라 D4에 연결한다.
 
 DHT dht(DHTPin, DHTTYPE);
 
@@ -83,13 +82,14 @@ void loop() {
             }
             client.println("HTTP/1.1 200 OK");
             client.println("Content-Type: text/html");
-            client.println("Connection: keep-alive");
+            client.println("Connection: close");
             client.println("Refresh: 2");
             client.println();
- 
+
+            //<meta http-equiv=\"refresh\" content=\"2\">
             client.println("<!DOCTYPE HTML>");
             client.println("<html>");
-            client.println("<head></head>");
+            client.println("<head><script src=\"https://cdn.plot.ly/plotly-latest.min.js\"></script></head>");
             client.print("<body><h1>weMos - Temperature and Humidity</h1>");
             client.print("<dl id='data'><dt class='Celsius'>");
             client.print("<h2>Temperature in Celsius : ");
