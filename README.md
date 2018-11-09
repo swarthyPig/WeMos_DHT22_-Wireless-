@@ -4,6 +4,7 @@
 * 포트포워딩시 socket.io에서 클라이언트로 데이터 전송이 되지 않는 문제를 해결하였다.
 * 답은 express-generator를 사용하고 express 와 socket.io 부분에 cors(Cross-Origin Resource Sharing) 설정을 해주므로써 
   해결되었다.
+* 이에 해당하는 부분은 새로운 폴더인 NodeScrapeGenerator(new version) 이다.
 ------------------------------------------------------------------------------------------------------------------------
 
 ## DHT22WeMos.ino
