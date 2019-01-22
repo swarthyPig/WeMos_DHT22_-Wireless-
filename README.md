@@ -42,7 +42,7 @@
   
 * **Scraping** 하는 과정을 화씨와 습도는 동일한 방법이므로 대표로 섭씨 온도만 설명하겠습니다.
   ```javascript
-  var url = 'http://192.168.0.11/';  // WeMos에서 띄워준 내부아이피 주소입니다
+  var url = 'http://192.168.0.11/';  // WeMos에서 띄워준 내부아이피 주소입니다 //후에는 포트포워딩된 주소로 진행했습니다
 
   var Celsius = '';  // 섭씨 온도를 담을 변수를 전역변수로 선언합니다
 
@@ -58,7 +58,7 @@
             //console.log(Celsius);
         });
     });
-      return Celsius; // 섭씨온도 데이터가 담긴 Celsius변수값을 리턴해줍니다.
+      return Celsius; .
   }
   ```
   
@@ -68,17 +68,16 @@
     
   setInterval(function () { // 아두이노 페이지가 2초마다 refresh되므로 마찬가지로 Scraping 부분도 반복시켜줍니다.
     var dateStr = getDateString(); // data가 들어온 시기를 나타내는 date를 변수에 담습니다.
-    var CelsiusData = getCelsius(); // 섭씨 온도 데이터를 변수에 담습니다.
-    var FahrenheitData = getFahrenheit(); // 화씨 온도 데이터를 변수에 담습니다.
-    var HumidityData = getHumidity(); // 습도 데이터를 변수에 담습니다.
+    var CelsiusData = getCelsius(); .
+    var FahrenheitData = getFahrenheit(); 
+    var HumidityData = getHumidity(); 
     dht22data[0] = dateStr; // Date
     dht22data[1] = CelsiusData; // temperature data
     dht22data[2] = FahrenheitData; // Fahrenheit data
     dht22data[3] = HumidityData; // humidity data
-    // 각각의 데이터를 배열의 0번인덱스부터 3번인덱스 까지 담습니다.
-    io.sockets.emit('message', dht22data); // socket.io를 사용하여 클라이언트 페이지에 데이터를 담은 배열을 전송합니다.
+    io.sockets.emit('message', dht22data); 
     console.log(dht22data);
-  }, 3000); // 이 반복(setInterval)은 3초마다 실행됩니다.
+  }, 3000); //
   ```
 ------------------------------------------------------------------------------------------------------------------------
 ## pm2(process manager)
