@@ -1,5 +1,19 @@
 # WeMos_DHT22_Wireless
 
+## 사용한 도구, 언어 및 기술
+  * Editor
+    - Brackets, arduino IDE
+  * 도구
+    - WeMos d1 r2 , DHT22
+  * Front-End
+    - HTML5, javascript, plotly.js, gauge.js
+  * Back-End
+    - express, node.js, socket.io
+  * Module and Library
+    - cheerio, cors
+  
+
+
 ## 18/11/09 
 * 포트포워딩시 socket.io에서 클라이언트로 데이터 전송이 되지 않는 문제를 해결하였다.
 * 답은 express-generator를 사용하고 express 와 socket.io 부분에 cors(Cross-Origin Resource Sharing) 설정을 해주므로써 
